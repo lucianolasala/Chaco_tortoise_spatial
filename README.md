@@ -2,7 +2,7 @@
 
 <img align="right" width="100" height="53" src="https://github.com/lucianolasala/Chelonoidis_chilensis/blob/bc1613dc9414b5efafd455cd5f8cfa305441cc1b/Images/Gopherus%20aga.png">
 
->* **Luciano F. La Sala & Joaquín Vázquez**, Instituto de Ciencias Biológicas y Biomédicas del Sur (CONICET-UNS), Bahía Blanca, Argentina.  
+>* **Luciano F. La Sala & Joaquín Vazquez**, Instituto de Ciencias Biológicas y Biomédicas del Sur (CONICET-UNS), Bahía Blanca, Argentina.  
 
 ### Introduction 
 This repository contains code used in analyses related to different publications:   
