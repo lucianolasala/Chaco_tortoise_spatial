@@ -1,4 +1,13 @@
-.Rproj.user
+# RStudio
+.Rproj.user/
 .Rhistory
 .RData
 .Ruserdata
+
+# Environmental rasters
+/Contents/01_ENM/01_data_preparation/CHELSA_variables/
+
+# Occurrence data: exclude everything except the R script
+/Contents/01_ENM/02_occurrence_data/*
+!/Contents/01_ENM/02_occurrence_data/01_spatian_thinning.R
+
