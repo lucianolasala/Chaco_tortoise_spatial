@@ -6,19 +6,18 @@ library(geosphere)
 
 rm(list = ls())
 
-
 # =========================================================
-# AJUSTES 
+# AJUSTES (movelos a gusto)
 # =========================================================
 
 # Leyenda: posición en el panel (0 = izquierda/abajo, 1 = derecha/arriba)
 legend_x <- 0.75
-legend_y <- 0.28
+legend_y <- 0.27
 
 # Barra de escala
 bar_km       <- 500     # largo total de la barra (km)
-bar_x        <- 0.8   # posición horizontal del CENTRO de la barra (0-1)
-bar_y        <- 0.025    # posición vertical de la barra (0-1)
+bar_x        <- 0.8    # posición horizontal del CENTRO de la barra (0-1)
+bar_y        <- 0.03    # posición vertical de la barra (0-1)
 bar_height   <- 0.006   # alto de la barra (fracción de la altura del mapa)
 label_offset <- 0.012   # distancia de las etiquetas por debajo de la barra
 label_size   <- 2.2     # tamaño del texto de la escala
@@ -31,7 +30,7 @@ pad_top    <- 0.025
 
 # Archivo
 file_jenks <- "D:/enm_cchilensis/output/chelsa_5vars/final_models_rasters/jenks_3classes.tif"
-file_out   <- "D:/enm_cchilensis/output/map_jenks.png"
+file_out   <- "D:/enm_cchilensis//output/map_jenks.png"
 
 
 # =========================================================
@@ -63,7 +62,7 @@ y_max <- e[4] + h * pad_top
 
 
 # =========================================================
-# 3. Barra de escala 
+# 3. Barra de escala (a la latitud media del mapa)
 # =========================================================
 
 mean_lat <- mean(c(e[3], e[4]))
