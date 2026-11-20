@@ -7,7 +7,7 @@
 .Ruserdata
 
 # ==================================================
-# Environmental raster data
+# Environmental raster and vector data
 # ==================================================
 *.tif
 *.tiff
@@ -27,5 +27,20 @@
 # ==================================================
 # Occurrence data
 # ==================================================
+
 /Contents/01_ENM/02_occurrence_data/*
 !/Contents/01_ENM/02_occurrence_data/01_spatian_thinning.R
+
+# ==================================================
+# CHELSA environmental data
+# ==================================================
+
+/Contents/01_ENM/01_data_preparation/CHELSA_bio_raw/
+/Contents/01_ENM/01_data_preparation/CHELSA_BIOCLIM_crop_G/
+/Contents/01_ENM/01_data_preparation/CHELSA_BIOCLIM_crop_M/
+/Contents/01_ENM/01_data_preparation/CHELSA_RSDS_estimates_crop_G/
+/Contents/01_ENM/01_data_preparation/CHELSA_RSDS_estimates_crop_M/
+/Contents/01_ENM/01_data_preparation/CHELSA_RSDS_native/
+/Contents/01_ENM/01_data_preparation/CHELSA_RSDS_raw/
+/Contents/01_ENM/01_data_preparation/CHELSA_variables_crop_M/
+/Contents/01_ENM/01_data_preparation/Vectors/
