@@ -10,7 +10,7 @@ dir_out <- "D:/CIC/Analisis/C_chilensis_spatial/Chaco_tortoise_spatial/Contents/
 dir.create(dir_out, recursive = TRUE, showWarnings = FALSE)
 
 #-----------------------------------------------------
-# BIO VARIABLES
+# BIO variables
 # Bio08, Bio09, Bio18, and Bio19 are excluded from 
 # downloads due to inconsistencies in the study region
 #-----------------------------------------------------
@@ -73,8 +73,7 @@ dir.create(dir_out, recursive = TRUE, showWarnings = FALSE)
 # URL base CHELSA v2.1
 base_url <- paste0(
   "https://os.zhdk.cloud.switch.ch/chelsav2/GLOBAL/",
-  "climatologies/1981-2010/bio/"
-)
+  "climatologies/1981-2010/bio/")
 
 # Aumentar timeout a 30 minutos
 options(timeout = 1800)
