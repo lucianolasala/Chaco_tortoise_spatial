@@ -1,0 +1,11 @@
+1. Folder: CHELSA_bio_raw
+Content: CHELSA variables (15 Bio) dwonloaded
+
+2. Folder: CHELSA_RSDS_native
+Content: CHELSA rsds (min, max, mean, y range) downloaded from: https://www.chelsa-climate.org/datasets/chelsa_bioclim
+
+3. Folder: CHELSA_RSDS_raw
+Contect: CHELSA rsds clomatologies for 12 monthds across whole  period
+
+4. Folder: CHELSA_variables_crop
+Content: CHELSA variables (all) cropped and masked to study region
