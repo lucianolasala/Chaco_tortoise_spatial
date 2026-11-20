@@ -20,14 +20,14 @@ This repository contains code used in analyses related to different publications
 - [Variables selection](./Contents/01_ENM/03_variables_selection/)
 - [Niche modeling](./Contents/01_ENM/04_kuenm/)
 
-#### 2. [Anthropization](./Contents/02_Anthropization/)
+#### 2. Anthropization]
 
-#### 3. [Protected areas](./Contents/03_Protected_areas/)
+#### 3. Protected areas
 
-#### 4. [Niche model & protected areas](./Contents/04_ENM_Protected_areas/)
+#### 4. Niche model & protected areas
 
-#### 5. [Niche model & anthropization](./Contents/05_ENM_Anthropization/)
+#### 5. Niche model & anthropization
 
-#### 6. [Landscape connectivity](./Contents/06_Landscape_connectivity/)
+#### 6. Landscape connectivity
 
-#### 7. [Conservation prioritization](./Contents/07_Conservation_prioritization/)
+#### 7. Conservation prioritization
