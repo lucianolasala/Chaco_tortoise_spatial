@@ -18,9 +18,13 @@ This repository contains code used in analyses related to different publications
 - [Data preparation](./Contents/01_ENM/01_data_preparation/)
 - [Occurrence data](./Contents/01_ENM/02_occurrence_data/)
 - [Variables selection](./Contents/01_ENM/03_variables_selection/)
-- [Niche modeling](./Contents/01_ENM/04_kuenm/)
+- [Model calibration](./Contents/01_ENM/04_model_calibration/)
+- [Model evaluation](./Contents/01_ENM/05_model_evaluation/)
+- [Model projection](./Contents/01_ENM/06_model_projection/)
+- [Extrapolation risk](./Contents/01_ENM/07_extrapolation_risk/)
+- [Final analyses](./Contents/01_ENM/08_final_analyses/)
 
-#### 2. Anthropization]
+#### 2. Anthropization
 
 #### 3. Protected areas
 
