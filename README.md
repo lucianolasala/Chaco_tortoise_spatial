@@ -11,10 +11,23 @@ This repository contains code used in analyses related to different publications
 ### Table of contents
 ----------
 
-[1. Niche model](./.../Flujo_trabajo.md)  
-[2. Anthropization](./.../.md)  
-[3. Protected areas](./.../.md)  
-[4. Niche model & protected areas](./.../.md)  
-[5. Niche model & antrhopization ](./.../.md)  
-[6. Landscape connectivity](./.../.md)  
-[7. Conservation prioritization](./.../.md)   
+### Table of contents
+----------
+
+#### 1. Potential distribution
+- [Data preparation](./Contents/01_ENM/01_data_preparation/)
+- [Occurrence data](./Contents/01_ENM/02_occurrence_data/)
+- [Variables selection](./Contents/01_ENM/03_variables_selection/)
+- [Niche modeling](./Contents/01_ENM/04_kuenm/)
+
+#### 2. [Anthropization](./Contents/02_Anthropization/)
+
+#### 3. [Protected areas](./Contents/03_Protected_areas/)
+
+#### 4. [Niche model & protected areas](./Contents/04_ENM_Protected_areas/)
+
+#### 5. [Niche model & anthropization](./Contents/05_ENM_Anthropization/)
+
+#### 6. [Landscape connectivity](./Contents/06_Landscape_connectivity/)
+
+#### 7. [Conservation prioritization](./Contents/07_Conservation_prioritization/)
