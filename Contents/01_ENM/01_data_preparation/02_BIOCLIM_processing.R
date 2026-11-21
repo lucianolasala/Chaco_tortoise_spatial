@@ -53,13 +53,20 @@ variables <- c(
 # Chequeo (MUY importante)
 stopifnot(length(ind_r) == length(variables))
 
-
 # =========================================================
 # Export CHELSA BIO variables as ASCII grids
 # =========================================================
 
-# Extract variable names from original filenames
-variables <- sub(".*CHELSA_bio([0-9]+)_.*", "BIO\\1", basename(files))
+# =========================================================
+# Extract and format BIO variable names
+# =========================================================
+
+# Extract BIO numbers from original filenames
+bio_num <- as.integer(
+  sub(".*CHELSA_bio([0-9]+)_.*", "\\1", basename(files)))
+
+# Format names with two digits
+variables <- sprintf("BIO%02d", bio_num)
 
 # Assign names to raster layers
 names(masked) <- variables
