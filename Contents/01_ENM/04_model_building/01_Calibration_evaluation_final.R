@@ -13,16 +13,6 @@ rm(list=ls(all=TRUE))
 
 library(kuenm)
 
-# Configure Java for MaxEnt
-java_dir <- "C:/Program Files/ArcGIS/Pro/java/runtime/jre/bin"
-
-Sys.setenv(
-  PATH = paste(java_dir, Sys.getenv("PATH"), sep = .Platform$path.sep))
-
-# Verify Java availability
-Sys.which("java")
-system2("java", "-version")
-
 setwd("D:/CIC/Analisis/C_chilensis_spatial/Chaco_tortoise_spatial/Contents/01_ENM/04_model_building")
 
 # Loadging occurrence data
@@ -55,12 +45,12 @@ kuenm_cal(occ.joint = occ_joint, occ.tra = occ_tra, M.var.dir = M_var_dir,
 # complexity (AICc). After evaluation, this function selects the best models 
 # based on user-defined criteria.  
 
-cresdir <- "output/chelsa_5vars/candidate_models"
-occ_joint <- "./datos/occ_joint_thined.csv"
-occ_tra <- "./datos/occ_train_thined.csv"
-occ_test <- "./datos/occ_test_thined.csv"
-gebatch_cal <- "./output/chelsa_5vars/candidate_models"
-out_eval <- "./output/chelsa_5vars/best_models"
+cresdir <- "./candidate_models"
+occ_joint <- "./Occs/occ_joint_thinned.csv"
+occ_tra <- "./Occs/occ_train_thinned.csv"  
+occ_test <- "./Occs/occ_test_thinned.csv"
+batch_cal <- "./candidate_models"
+out_eval <- "./Best_models"
 
 threshold <- 5  # Percentage of training data omission error allowed (E); default = 5
 rand_percent <- 50  # Percentage of data to be used for the bootstraping process 
