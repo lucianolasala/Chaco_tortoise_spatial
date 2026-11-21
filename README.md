@@ -5,7 +5,7 @@
 >* **Luciano F. La Sala & Joaquín Vazquez**, Instituto de Ciencias Biológicas y Biomédicas del Sur (CONICET-UNS), Bahía Blanca, Argentina.  
 
 ### Introduction 
-This repository contains code used in analyses related to different publications: - From environmental suitability to conservation priorities: a range-wide assessment of the Chaco tortoise (*Chelonoidis chilensis*).  
+This repository contains code used in analyses related to different publications:   - From environmental suitability to conservation priorities: a range-wide assessment of the Chaco tortoise (*Chelonoidis chilensis*).  
 
 ### Table of contents
 ----------
