@@ -7,7 +7,7 @@ This directory contains the scripts and supporting documentation used to develop
 ### 1. Environmental data preparation and variable screening
 Environmental predictors were prepared for the calibration area (M). Pairwise Pearson correlations were examined to identify strongly correlated predictors (|r| ≥ 0.8). Decisions about retaining variables also considered their ecological relevance.
 
-### 2. Candidate model calibration
+### 2. Candidate model calibration  
 Candidate models were generated with `kuenm_cal`, exploring combinations of regularization multipliers (RM), feature classes (FC), and sets of environmental predictors.
 
 ### 3. Candidate model evaluation and selection
