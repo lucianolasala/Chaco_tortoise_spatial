@@ -1,6 +1,7 @@
-#------------------------------------------------------
+
+# =========================================================
 # Model calibration
-#------------------------------------------------------
+# =========================================================
 
 # The following code generates candidate models to test multiple parameter 
 # combinations, including distinct regularization multiplier values, various 
@@ -8,37 +9,42 @@
 
 rm(list=ls(all=TRUE))
 
-# Installing and loading packages
-
-if(!require(devtools)){
-  install.packages("devtools")
-}
-
-if(!require(kuenm)){
-  devtools::install_github("marlonecobos/kuenm")
-}
+# Loading libraries
 
 library(kuenm)
 
-occ_joint <- "./datos/occ_joint_thined.csv"     
-occ_tra <- "./datos/occ_train_thined.csv"       
-M_var_dir <- "output/chelsa_5vars/calibration_m"     
-batch_cal <- "./output/chelsa_5vars/candidate_models"   
-out_dir <- "./output/chelsa_5vars/candidate_models"    
+# Configure Java for MaxEnt
+java_dir <- "C:/Program Files/ArcGIS/Pro/java/runtime/jre/bin"
+
+Sys.setenv(
+  PATH = paste(java_dir, Sys.getenv("PATH"), sep = .Platform$path.sep))
+
+# Verify Java availability
+Sys.which("java")
+system2("java", "-version")
+
+setwd("D:/CIC/Analisis/C_chilensis_spatial/Chaco_tortoise_spatial/Contents/01_ENM/04_model_building")
+
+# Loadging occurrence data
+occ_joint <- "./Occs/occ_joint_thinned.csv"
+occ_tra <- "./Occs/occ_train_thinned.csv"     
+M_var_dir <- "M"     
+batch_cal <- "Candidate_models"   
+out_dir <- "Candidate_models"    
 reg_mult <- c(0.1,0.25,0.5,0.75,1,2.5,5)
 f_clas <- c("l", "lq", "lqp")
 args <- NULL
 
 # Usar ruta absoluta porque tira error
-mxpath <- "C:/Users/vazqu/Documents/Uni/Doctorado/enm_cchilensis/maxent" 
-
-wait <- FALSE
+mxpath <- "C:/Program Files/maxent/maxent" 
+wait <- TRUE
 run <- TRUE
 
 kuenm_cal(occ.joint = occ_joint, occ.tra = occ_tra, M.var.dir = M_var_dir, 
           batch = batch_cal, out.dir = out_dir, 
           reg.mult = reg_mult, f.clas = f_clas, args = args, 
           maxent.path = mxpath, wait = wait, run = run)
+
 
 #------------------------------------------------------
 # Model Evaluation

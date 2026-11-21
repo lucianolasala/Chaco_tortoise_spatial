@@ -1,6 +1,6 @@
 
 # =========================================================
-# Derivar variables a partir de climatologías mensuales
+# Derive variables from monthly climatologies
 # CHELSA v2.1 | RSDS | 1981–2010
 # =========================================================
 

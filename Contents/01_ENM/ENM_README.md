@@ -4,8 +4,10 @@ This directory contains the scripts and supporting documentation used to develop
 
 ### Workflow
 
-#### 1. Environmental data preparation and variable screening
-Environmental predictors were prepared for the calibration area (M). Pairwise Pearson correlations were examined to identify strongly correlated predictors (|r| ≥ 0.8). Decisions about retaining variables also considered their ecological relevance.
+#### 1. Environmental data preparation and variable screening  
+Environmental predictors were obtained from the CHELSA (Climatologies at High Resolution for the Earth's Land Surface Areas) dataset, version 2.1. These included bioclimatic variables representing temperature and precipitation conditions for the 1981–2010 reference period, as well as solar radiation variables (RSDS). Environmental layers were cropped and masked to the calibration area (M), retaining their original spatial resolution.
+
+To reduce redundancy among predictors, pairwise Pearson correlation coefficients were calculated using a random sample of raster cells with complete environmental data within M. Strongly correlated variable pairs (|r| ≥ 0.8) were identified, and variable retention decisions also considered ecological relevance to *Chelonoidis chilensis*.
 
 #### 2. Candidate model calibration  
 Candidate models were generated with `kuenm_cal`, exploring combinations of regularization multipliers (RM), feature classes (FC), and sets of environmental predictors.
