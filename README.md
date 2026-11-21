@@ -11,10 +11,8 @@ This repository contains code used in analyses related to different publications
 ### Table of contents
 ----------
 
-### Table of contents
-----------
-
 #### 1. Potential distribution
+- [Modeling workflow](./Contents/01_ENM/ENM_README.md)
 - [Data preparation](./Contents/01_ENM/01_data_preparation/)
 - [Occurrence data](./Contents/01_ENM/02_occurrence_data/)
 - [Variables selection](./Contents/01_ENM/03_variables_selection/)
