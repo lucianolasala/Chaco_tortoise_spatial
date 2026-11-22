@@ -68,20 +68,20 @@ kuenm_ceval(path = cresdir, occ.joint = occ_joint, occ.tra = occ_tra,
             threshold = threshold, rand.percent = rand_percent, iterations = iterations,
             kept = kept, selection = selection)
 
-
 #------------------------------------------------------
 # Creation of final models without projection
 #------------------------------------------------------
 
 rm(list=ls(all=TRUE))
 
-occ_joint <- "./datos/occ_joint_thined.csv" 
-batch_fin <- "./output/chelsa_5vars/final_models_no_proj"
-moddir <- "./output/chelsa_5vars/final_models_no_proj"
-M_var_dir <- "output/chelsa_5vars/calibration_m"
-out_eval <- "./output/chelsa_5vars/best_models"
+occ_joint <- "./Occs/occ_joint_thinned.csv"
+batch_fin <- "./final_models_no_proj"
+moddir <- "./Final_models_no_proj"
+M_var_dir <- "M"
+out_eval <- "./Best_models"
 args <- NULL
-mxpath <- "C:/Users/vazqu/Documents/Uni/Doctorado/enm_cchilensis/maxent"
+
+mxpath <- "C:/Program Files/maxent/maxent" 
 
 kuenm_mod(occ.joint = occ_joint, M.var.dir = M_var_dir, out.eval = out_eval, 
           batch = batch_fin, rep.n = 10, args = args, rep.type = "Bootstrap",
