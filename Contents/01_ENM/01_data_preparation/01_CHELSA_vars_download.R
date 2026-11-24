@@ -6,7 +6,7 @@ install.packages("envar")
 library(envar)
 
 # Target folder
-dir_out <- "D:/CIC/Analisis/C_chilensis_spatial/Chaco_tortoise_spatial/Contents/01_ENM/01_data_preparation/CHELSA_variables"
+dir_out <- "./Contents/01_ENM/01_data_preparation/CHELSA_variables"
 dir.create(dir_out, recursive = TRUE, showWarnings = FALSE)
 
 #-----------------------------------------------------
@@ -67,7 +67,7 @@ for (v in vars) {
 vars <- c("max", "mean", "min", "range")
 
 # Carpeta de destino
-dir_out <- "D:/CIC/Analisis/C_chilensis_spatial/Chaco_tortoise_spatial/Contents/01_ENM/01_data_preparation/CHELSA_variables"
+dir_out <- "./Contents/01_ENM/01_data_preparation/CHELSA_variables"
 dir.create(dir_out, recursive = TRUE, showWarnings = FALSE)
 
 # URL base CHELSA v2.1
@@ -136,7 +136,7 @@ for (v in vars) {
 rm(list = ls())
 
 # Destination folder (modify as needed)
-dir_out <- "D:/CIC/Analisis/C_chilensis_spatial/Chaco_tortoise_spatial/Contents/01_ENM/01_data_preparation/CHELSA_RSDS_raw"
+dir_out <- "./Contents/01_ENM/01_data_preparation/CHELSA_RSDS_raw"
 dir.create(dir_out, recursive = TRUE, showWarnings = FALSE)
 
 # CHELSA server

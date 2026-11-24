@@ -11,7 +11,7 @@ library(classInt)
 rm(list=ls())
 
 # 1. Configuracion
-archivo <- "./output/chelsa_5vars/Final_model_stats/Statistics_E/calibration_mean.tif"
+archivo <- "./Contents/01_ENM/04_model_building/Final_model_stats/Statistics_E/calibration_mean.tif"
 
 # 2. Cargar raster continuo
 r <- rast(archivo)
@@ -230,7 +230,7 @@ print(round(comparacion, 5))
 
 writeRaster(
   r_clases,
-  "./output/chelsa_5vars/final_models_rasters/jenks_3classes.tif",
+  "./Contents/01_ENM/04_model_building/final_models_rasters/jenks_3classes.tif",
   overwrite = TRUE,
   datatype = "INT1U",
   gdal = c("COMPRESS=LZW"))
