@@ -13,14 +13,12 @@ rm(list=ls(all=TRUE))
 
 library(kuenm)
 
-setwd("D:/CIC/Analisis/C_chilensis_spatial/Chaco_tortoise_spatial/Contents/01_ENM/04_model_building")
-
 # Loadging occurrence data
 occ_joint <- "./Occs/occ_joint_thinned.csv"
 occ_tra <- "./Occs/occ_train_thinned.csv"     
 M_var_dir <- "M"     
-batch_cal <- "Candidate_models"   
-out_dir <- "Candidate_models"    
+batch_cal <- "./Contents/01_ENM/04_model_building"   
+out_dir <- "./Contents/01_ENM/04_model_building/Candidate_models"    
 reg_mult <- c(0.1,0.25,0.5,0.75,1,2.5,5)
 f_clas <- c("l", "lq", "lqp")
 args <- NULL
