@@ -24,6 +24,14 @@
 *.qmd
 *.txt
 *.aux.xml
+*.csv
+*.html
+*.lambdas
+*.log
+*.diff
+*.png
+*.bat
+
 
 # ==================================================
 # Occurrence data
