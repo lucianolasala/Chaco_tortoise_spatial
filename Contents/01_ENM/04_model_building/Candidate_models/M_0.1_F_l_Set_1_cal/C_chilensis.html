@@ -1,0 +1,46 @@
+<title>Maxent model for C_chilensis</title>
+<CENTER><H1>Maxent model for C_chilensis</H1></CENTER>
+<br> This page contains some analysis of the Maxent model for C_chilensis, created Sat Nov 21 19:36:35 ART 2026 using Maxent version 3.4.4.  If you would like to do further analyses, the raw data used here is linked to at the end of this page.<br>
+Some common thresholds and corresponding omission rates are as follows.  If test data are available, binomial probabilities are calculated exactly if the number of test samples is at most 25, otherwise using a normal approximation to the binomial.  These are 1-sided p-values for the null hypothesis that test points are predicted no better than by a random prediction with the same fractional predicted area.  The "Balance" threshold minimizes 6 * training omission rate + .04 * cumulative threshold + 1.6 * fractional predicted area.<br>
+<br><table border cols=4 cellpadding=3><tr><th>Cumulative threshold</th><th>Logistic threshold</th><th>Description</th><th>Fractional predicted area</th><th>Training omission rate</th><tr align=center><td>1.000</td><td>0.116</td><td>Fixed cumulative value 1</td><td>0.871</td><td>0.000</td><tr align=center><td>5.000</td><td>0.266</td><td>Fixed cumulative value 5</td><td>0.744</td><td>0.022</td><tr align=center><td>10.000</td><td>0.338</td><td>Fixed cumulative value 10</td><td>0.654</td><td>0.067</td><tr align=center><td>1.443</td><td>0.148</td><td>Minimum training presence</td><td>0.848</td><td>0.000</td><tr align=center><td>13.306</td><td>0.364</td><td>10 percentile training presence</td><td>0.607</td><td>0.100</td><tr align=center><td>36.889</td><td>0.484</td><td>Equal training sensitivity and specificity</td><td>0.362</td><td>0.362</td><tr align=center><td>21.742</td><td>0.414</td><td>Maximum training sensitivity plus specificity</td><td>0.505</td><td>0.177</td><tr align=center><td>2.364</td><td>0.190</td><td>Balance training omission, predicted area and threshold value</td><td>0.813</td><td>0.002</td><tr align=center><td>3.608</td><td>0.230</td><td>Equate entropy of thresholded and original distributions</td><td>0.776</td><td>0.017</td></table><br>
+<br>Click <a href=C_chilensis_explain.bat type=application/bat>here<a> to interactively explore this prediction using the Explain tool.  If clicking from your browser does not succeed in starting the tool, try running the script in D:\CIC\Analisis\C_chilensis_spatial\Chaco_tortoise_spatial\Contents\01_ENM\04_model_building\Candidate_models\M_0.1_F_l_Set_1_cal\C_chilensis_explain.bat directly.  This tool requires the environmental grids to be small enough that they all fit in memory.<br><br>
+<br><HR><H2>Analysis of variable contributions</H2><br>
+The following table gives estimates of relative contributions of the environmental variables to the Maxent model.  To determine the first estimate, in each iteration of the training algorithm, the increase in regularized gain is added to the contribution of the corresponding variable, or subtracted from it if the change to the absolute value of lambda is negative.  For the second estimate, for each environmental variable in turn, the values of that variable on training presence and background data are randomly permuted.  The model is reevaluated on the permuted data, and the resulting drop in training AUC is shown in the table, normalized to percentages.  As with the variable jackknife, variable contributions should be interpreted with caution when the predictor variables are correlated.<br>
+<br><table border cols=3><tr><th>Variable</th><th>Percent contribution</th><th>Permutation importance</th><tr align=right><td>BIO17</td><td>58.4</td><td>53.9</td></tr><tr align=right><td>BIO03</td><td>12.8</td><td>13.1</td></tr><tr align=right><td>BIO06</td><td>12.2</td><td>20.6</td></tr><tr align=right><td>BIO12</td><td>11.5</td><td>7.6</td></tr><tr align=right><td>BIO15</td><td>5</td><td>4.8</td></tr></table><br><br>
+<br><HR><H2>Raw data outputs and control parameters</H2><br>
+The data used in the above analysis is contained in the next links.  Please see the Help button for more information on these.<br>
+<a href = "C_chilensis.asc">The model applied to the training environmental layers</a><br>
+<a href = "C_chilensis.lambdas">The coefficients of the model</a><br>
+<a href = "C_chilensis_omission.csv">The omission and predicted area for varying cumulative and raw thresholds</a><br>
+<a href = "C_chilensis_samplePredictions.csv">The prediction strength at the training and (optionally) test presence sites</a><br>
+<a href = "maxentResults.csv">Results for all species modeled in the same Maxent run, with summary statistics and (optionally) jackknife results</a><br>
+<br><br>
+Regularized training gain is 0.253, training AUC is 0.686, unregularized training gain is 0.255.<br>
+Algorithm converged after 100 iterations (0 seconds).<br>
+<br>
+The follow settings were used during the run:<br>
+401 presence records used for training.<br>
+10398 points used to determine the Maxent distribution (background points and presence points).<br>
+Environmental layers used (all continuous): BIO03 BIO06 BIO12 BIO15 BIO17<br>
+Regularization values: linear/quadratic/product: 0.050, categorical: 0.250, threshold: 1.000, hinge: 0.500<br>
+Feature types used: linear<br>
+pictures: false<br>
+outputformat: logistic<br>
+outputdirectory: D:\CIC\Analisis\C_chilensis_spatial\Chaco_tortoise_spatial\Contents\01_ENM\04_model_building\Candidate_models\M_0.1_F_l_Set_1_cal<br>
+samplesfile: D:\CIC\Analisis\C_chilensis_spatial\Chaco_tortoise_spatial\Contents\01_ENM\04_model_building\.\Occs\occ_train_thinned.csv<br>
+environmentallayers: D:\CIC\Analisis\C_chilensis_spatial\Chaco_tortoise_spatial\Contents\01_ENM\04_model_building\M\Set_1<br>
+warnings: false<br>
+askoverwrite: false<br>
+betamultiplier: 0.1<br>
+quadratic: false<br>
+product: false<br>
+hinge: false<br>
+autorun: true<br>
+extrapolate: false<br>
+visible: false<br>
+autofeature: false<br>
+doclamp: false<br>
+plots: false<br>
+Command line used:  environmentallayers=D:\CIC\Analisis\C_chilensis_spatial\Chaco_tortoise_spatial\Contents\01_ENM\04_model_building\M\Set_1 samplesfile=D:\CIC\Analisis\C_chilensis_spatial\Chaco_tortoise_spatial\Contents\01_ENM\04_model_building\.\Occs\occ_train_thinned.csv outputdirectory=D:\CIC\Analisis\C_chilensis_spatial\Chaco_tortoise_spatial\Contents\01_ENM\04_model_building\Candidate_models\M_0.1_F_l_Set_1_cal betamultiplier=0.1 autofeature=false linear=true quadratic=false product=false threshold=false hinge=false extrapolate=false doclamp=false replicates=1 replicatetype=Crossvalidate responsecurves=false jackknife=false plots=false pictures=false outputformat=logistic warnings=false visible=false redoifexists autorun<br>
+<br>
+Command line to repeat this species model: java density.MaxEnt nowarnings noprefixes -E "" -E C_chilensis nopictures outputformat=logistic outputdirectory=D:\CIC\Analisis\C_chilensis_spatial\Chaco_tortoise_spatial\Contents\01_ENM\04_model_building\Candidate_models\M_0.1_F_l_Set_1_cal samplesfile=D:\CIC\Analisis\C_chilensis_spatial\Chaco_tortoise_spatial\Contents\01_ENM\04_model_building\.\Occs\occ_train_thinned.csv environmentallayers=D:\CIC\Analisis\C_chilensis_spatial\Chaco_tortoise_spatial\Contents\01_ENM\04_model_building\M\Set_1 nowarnings noaskoverwrite betamultiplier=0.1 noquadratic noproduct nohinge autorun noextrapolate novisible noautofeature nodoclamp noplots<br>

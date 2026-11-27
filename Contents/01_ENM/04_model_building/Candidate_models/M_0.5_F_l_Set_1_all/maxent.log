@@ -1,0 +1,54 @@
+Sat Nov 21 19:38:11 ART 2026
+MaxEnt version 3.4.4
+Checking header of D:\CIC\Analisis\C_chilensis_spatial\Chaco_tortoise_spatial\Contents\01_ENM\04_model_building\M\Set_1\BIO03.asc
+Checking header of D:\CIC\Analisis\C_chilensis_spatial\Chaco_tortoise_spatial\Contents\01_ENM\04_model_building\M\Set_1\BIO06.asc
+Checking header of D:\CIC\Analisis\C_chilensis_spatial\Chaco_tortoise_spatial\Contents\01_ENM\04_model_building\M\Set_1\BIO12.asc
+Checking header of D:\CIC\Analisis\C_chilensis_spatial\Chaco_tortoise_spatial\Contents\01_ENM\04_model_building\M\Set_1\BIO15.asc
+Checking header of D:\CIC\Analisis\C_chilensis_spatial\Chaco_tortoise_spatial\Contents\01_ENM\04_model_building\M\Set_1\BIO17.asc
+Reading samples from occ_joint_thinned.csv
+Read samples: max memory 1048576000, total allocated 199229440, free 185115584, used 14113856, increment 14113856
+Extractor: max memory 1048576000, total allocated 199229440, free 181969736, used 17259704, increment 3145848
+Extracting random background and sample data
+Time since start: 1.134
+2606701 points with values for all grids
+Adding samples to background in feature space
+Command line used:  environmentallayers=D:\CIC\Analisis\C_chilensis_spatial\Chaco_tortoise_spatial\Contents\01_ENM\04_model_building\M\Set_1 samplesfile=D:\CIC\Analisis\C_chilensis_spatial\Chaco_tortoise_spatial\Contents\01_ENM\04_model_building\.\Occs\occ_joint_thinned.csv outputdirectory=D:\CIC\Analisis\C_chilensis_spatial\Chaco_tortoise_spatial\Contents\01_ENM\04_model_building\Candidate_models\M_0.5_F_l_Set_1_all betamultiplier=0.5 autofeature=false linear=true quadratic=false product=false threshold=false hinge=false extrapolate=false doclamp=false replicates=1 replicatetype=Crossvalidate responsecurves=false jackknife=false plots=false pictures=false outputformat=raw warnings=false visible=false redoifexists autorun
+Command line to repeat: java density.MaxEnt nowarnings noprefixes nopictures outputformat=raw outputdirectory=D:\CIC\Analisis\C_chilensis_spatial\Chaco_tortoise_spatial\Contents\01_ENM\04_model_building\Candidate_models\M_0.5_F_l_Set_1_all samplesfile=D:\CIC\Analisis\C_chilensis_spatial\Chaco_tortoise_spatial\Contents\01_ENM\04_model_building\.\Occs\occ_joint_thinned.csv environmentallayers=D:\CIC\Analisis\C_chilensis_spatial\Chaco_tortoise_spatial\Contents\01_ENM\04_model_building\M\Set_1 nowarnings noaskoverwrite betamultiplier=0.5 noquadratic noproduct nohinge autorun noextrapolate novisible noautofeature nodoclamp noplots
+Species: C_chilensis
+Layers: BIO03 BIO06 BIO12 BIO15 BIO17
+Layertypes: Continuous Continuous Continuous Continuous Continuous
+pictures: false
+outputformat: raw
+outputdirectory: D:\CIC\Analisis\C_chilensis_spatial\Chaco_tortoise_spatial\Contents\01_ENM\04_model_building\Candidate_models\M_0.5_F_l_Set_1_all
+samplesfile: D:\CIC\Analisis\C_chilensis_spatial\Chaco_tortoise_spatial\Contents\01_ENM\04_model_building\.\Occs\occ_joint_thinned.csv
+environmentallayers: D:\CIC\Analisis\C_chilensis_spatial\Chaco_tortoise_spatial\Contents\01_ENM\04_model_building\M\Set_1
+warnings: false
+askoverwrite: false
+betamultiplier: 0.5
+quadratic: false
+product: false
+hinge: false
+autorun: true
+extrapolate: false
+visible: false
+autofeature: false
+doclamp: false
+plots: false
+
+getSamples: max memory 1048576000, total allocated 199229440, free 193986888, used 5242552, increment -12017152
+Making features
+makeFeatures: max memory 1048576000, total allocated 199229440, free 193294848, used 5934592, increment 692040
+C_chilensis: 
+Regularization values: linear/quadratic/product: 0.050, categorical: 0.250, threshold: 1.000, hinge: 0.500
+573 samples
+Density: max memory 1048576000, total allocated 199229440, free 192770560, used 6458880, increment 524288
+linearPredictor: max memory 1048576000, total allocated 199229440, free 192770560, used 6458880, increment 0
+FeaturedSpace: max memory 1048576000, total allocated 199229440, free 192770560, used 6458880, increment 0
+Sequential: max memory 1048576000, total allocated 199229440, free 192770560, used 6458880, increment 0
+Initial loss: 9.265775078864284
+120: time = 0.088000 loss = 9.034531
+Resulting gain: 0.23124373902741624
+Projecting...
+Writing file D:\CIC\Analisis\C_chilensis_spatial\Chaco_tortoise_spatial\Contents\01_ENM\04_model_building\Candidate_models\M_0.5_F_l_Set_1_all\C_chilensis.asc
+Time since start: 10.92
+Ending

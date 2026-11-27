@@ -1,0 +1,810 @@
+diff --git a/Contents/01_ENM/01_data_preparation/01_CHELSA_vars_download.R b/Contents/01_ENM/01_data_preparation/01_CHELSA_vars_download.R
+index 140e181..1555f11 100644
+--- a/Contents/01_ENM/01_data_preparation/01_CHELSA_vars_download.R
++++ b/Contents/01_ENM/01_data_preparation/01_CHELSA_vars_download.R
+@@ -6,7 +6,7 @@ install.packages("envar")
+ library(envar)
+ 
+ # Target folder
+-dir_out <- "D:/CIC/Analisis/C_chilensis_spatial/Chaco_tortoise_spatial/Contents/01_ENM/01_data_preparation/CHELSA_variables"
++dir_out <- "./Contents/01_ENM/01_data_preparation/CHELSA_variables"
+ dir.create(dir_out, recursive = TRUE, showWarnings = FALSE)
+ 
+ #-----------------------------------------------------
+@@ -67,7 +67,7 @@ for (v in vars) {
+ vars <- c("max", "mean", "min", "range")
+ 
+ # Carpeta de destino
+-dir_out <- "D:/CIC/Analisis/C_chilensis_spatial/Chaco_tortoise_spatial/Contents/01_ENM/01_data_preparation/CHELSA_variables"
++dir_out <- "./Contents/01_ENM/01_data_preparation/CHELSA_variables"
+ dir.create(dir_out, recursive = TRUE, showWarnings = FALSE)
+ 
+ # URL base CHELSA v2.1
+@@ -136,7 +136,7 @@ for (v in vars) {
+ rm(list = ls())
+ 
+ # Destination folder (modify as needed)
+-dir_out <- "D:/CIC/Analisis/C_chilensis_spatial/Chaco_tortoise_spatial/Contents/01_ENM/01_data_preparation/CHELSA_RSDS_raw"
++dir_out <- "./Contents/01_ENM/01_data_preparation/CHELSA_RSDS_raw"
+ dir.create(dir_out, recursive = TRUE, showWarnings = FALSE)
+ 
+ # CHELSA server
+diff --git a/Contents/01_ENM/02_occurrence_data/01_spatian_thinning.R b/Contents/01_ENM/02_occurrence_data/01_spatian_thinning.R
+index 6e595b1..13ce546 100644
+--- a/Contents/01_ENM/02_occurrence_data/01_spatian_thinning.R
++++ b/Contents/01_ENM/02_occurrence_data/01_spatian_thinning.R
+@@ -6,9 +6,8 @@ library(magrittr)
+ library(spThin)
+ library(dplyr)
+ 
+-setwd("D:/LFLS/Analyses/C_chilensis_EMN")
+ 
+-occ <- read_delim("./Modelado/Occs/C_chilensis.csv", delim = ",") %>% 
++occ <- read_delim("./Contents/01_ENM/02_occurrence_data/Occs_chilensis.csv", delim = ",") %>% 
+ thin(loc.data = .,
+        long.col = "Lon",
+        lat.col = "Lat",
+@@ -18,7 +17,7 @@ thin(loc.data = .,
+        write.files = TRUE,
+        max.files = 10,
+        write.log.file = TRUE,
+-       out.dir = "./Modelado/Occs_thin/",
++       out.dir = "./Contents/01_ENM/02_occurrence_data/Occs_thin/",
+        out.base = "C_chilensis_thin",
+        log.file = "C_chilensis_thin_log.txt")
+ 
+@@ -29,4 +28,4 @@ head(occ)
+ length(occ$sp)  # 2511
+ str(occ)
+ 
+-write.csv(occ, "./Occurrences/S_scrofa_thinned.csv", row.names = F) 
+\ No newline at end of file
++write.csv(occ, "./Contents/01_ENM/02_occurrence_data/occs_thinned.csv", row.names = F) 
+\ No newline at end of file
+diff --git a/Contents/01_ENM/04_model_building/01_Calibration_evaluation_final.R b/Contents/01_ENM/04_model_building/01_Calibration_evaluation_final.R
+index 9564163..ceecd37 100644
+--- a/Contents/01_ENM/04_model_building/01_Calibration_evaluation_final.R
++++ b/Contents/01_ENM/04_model_building/01_Calibration_evaluation_final.R
+@@ -9,23 +9,24 @@
+ 
+ rm(list=ls(all=TRUE))
+ 
++
+ # Loading libraries
+ 
+ library(kuenm)
+ 
+-setwd("D:/CIC/Analisis/C_chilensis_spatial/Chaco_tortoise_spatial/Contents/01_ENM/04_model_building")
++setwd("./Contents/01_ENM/04_model_building")
+ 
+-# Loadging occurrence data
+-occ_joint <- "./Occs/occ_joint_thinned.csv"
+-occ_tra <- "./Occs/occ_train_thinned.csv"     
++# Loading occurrence data
++occ_joint <- "./Contents/01_ENM/02_occurrence_data/occ_joint.csv"
++occ_tra <- "./Contents/01_ENM/02_occurrence_data/occ_train.csv"     
+ M_var_dir <- "M"     
+-batch_cal <- "Candidate_models"   
+-out_dir <- "Candidate_models"    
++batch_cal <- "./candidate_models"   
++out_dir <- "./candidate_models"    
+ reg_mult <- c(0.1,0.25,0.5,0.75,1,2.5,5)
+ f_clas <- c("l", "lq", "lqp")
+ args <- NULL
+ 
+-# Usar ruta absoluta porque tira error
++# Usar ruta absoluta
+ mxpath <- "C:/Program Files/maxent/maxent" 
+ wait <- TRUE
+ run <- TRUE
+@@ -45,12 +46,12 @@ kuenm_cal(occ.joint = occ_joint, occ.tra = occ_tra, M.var.dir = M_var_dir,
+ # complexity (AICc). After evaluation, this function selects the best models 
+ # based on user-defined criteria.  
+ 
+-cresdir <- "./candidate_models"
+-occ_joint <- "./Occs/occ_joint_thinned.csv"
+-occ_tra <- "./Occs/occ_train_thinned.csv"  
+-occ_test <- "./Occs/occ_test_thinned.csv"
++cresdir <- "candidate_models"
++occ_joint <- "./Contents/01_ENM/02_occurrence_data/occ_joint.csv"
++occ_tra <- "./Contents/01_ENM/02_occurrence_data/occ_train.csv"
++occ_test <- "./Contents/01_ENM/02_occurrence_data/occ_test.csv"
+ batch_cal <- "./candidate_models"
+-out_eval <- "./Best_models"
++out_eval <- "./best_models"
+ 
+ threshold <- 5  # Percentage of training data omission error allowed (E); default = 5
+ rand_percent <- 50  # Percentage of data to be used for the bootstraping process 
+@@ -74,11 +75,11 @@ kuenm_ceval(path = cresdir, occ.joint = occ_joint, occ.tra = occ_tra,
+ 
+ rm(list=ls(all=TRUE))
+ 
+-occ_joint <- "./Occs/occ_joint_thinned.csv"
++occ_joint <- "./Contents/01_ENM/02_occurrence_data/occ_joint.csv"
+ batch_fin <- "./final_models_no_proj"
+-moddir <- "./Final_models_no_proj"
++moddir <- "./final_models_no_proj"
+ M_var_dir <- "M"
+-out_eval <- "./Best_models"
++out_eval <- "./best_models"
+ args <- NULL
+ 
+ mxpath <- "C:/Program Files/maxent/maxent" 
+@@ -97,14 +98,14 @@ kuenm_mod(occ.joint = occ_joint, M.var.dir = M_var_dir, out.eval = out_eval,
+ 
+ rm(list=ls(all=TRUE))
+ 
+-occ_joint <- "./datos/occ_joint_thined.csv" 
+-batch_fin <- "./output/chelsa_5vars/final_models_with_proj"
+-moddir <- "./output/chelsa_5vars/final_models_time_proj"
+-M_var_dir <- "output/chelsa_5vars/calibration_m"
+-G_var_dir <- "output/chelsa_5vars/projection_g"
+-out_eval <- "./output/chelsa_5vars/best_models"
++occ_joint <- "./Contents/01_ENM/02_occurrence_data/occ_joint.csv"
++batch_fin <- "./final_models_with_proj"
++moddir <- "./final_models_with_proj"
++M_var_dir <- "M"
++G_var_dir <- "G"
++out_eval <- "./best_models"
+ args <- NULL
+-mxpath <- "C:/Users/vazqu/Documents/Uni/Doctorado/enm_cchilensis/maxent"
++mxpath <- "C:/Program Files/maxent/maxent" 
+ 
+ kuenm_mod(occ.joint = occ_joint, M.var.dir = M_var_dir, 
+           G.var.dir = G_var_dir, ext.type = "ext", out.eval = out_eval, 
+diff --git a/Contents/01_ENM/04_model_building/02_Extrapolation_risk.R b/Contents/01_ENM/04_model_building/02_Extrapolation_risk.R
+index d6b5958..1c120d2 100644
+--- a/Contents/01_ENM/04_model_building/02_Extrapolation_risk.R
++++ b/Contents/01_ENM/04_model_building/02_Extrapolation_risk.R
+@@ -10,13 +10,13 @@ rm(list=ls(all=TRUE))
+ library(raster)
+ 
+ 
+-files_M <- list.files(path = "./output/chelsa_thined3/calibration_m/set_1", 
++files_M <- list.files(path = "./Contents/01_ENM/04_model_building/M/set_1", 
+                       pattern = ".asc$", full.names = TRUE)
+ 
+ for(i in 1:length(files_M)) {
+   r <- raster(files_M[i])
+   x <- raster::aggregate(r, fact=5, fun=mean)
+-  writeRaster(x, filename = paste(getwd(), "/output/chelsa_thined3/calibration_m/set_1/", 
++  writeRaster(x, filename = paste(getwd(), "/Contents/01_ENM/04_model_building/M/set_1", 
+                                   basename(files_M[i]), sep = ''), format = "ascii",
+               overwrite = TRUE)
+ }
+@@ -25,13 +25,13 @@ for(i in 1:length(files_M)) {
+ 
+ rm(list=ls(all=TRUE))
+ 
+-files_G <- list.files(path = "./output/chelsa_thined3/projection_g/set_1/Current", 
++files_G <- list.files(path = "./Contents/01_ENM/04_model_building/G/set_1/Current", 
+                       pattern = ".asc$", full.names = TRUE)
+ 
+ for(i in 1:length(files_G)) {
+   r <- raster(files_G[i])
+   x <- raster::aggregate(r, fact=5, fun=mean)
+-  writeRaster(x, filename = paste(getwd(), "/output/chelsa_thined3/projection_g/set_1/Current/", 
++  writeRaster(x, filename = paste(getwd(), "/Contents/01_ENM/04_model_building/G/set_1/Current", 
+                                   basename(files_G[i]), sep = ''), format = "ascii",
+               overwrite = TRUE)
+ }
+@@ -43,12 +43,12 @@ rm(list=ls(all=TRUE))
+ library(kuenm)
+ 
+ 
+-rasters_m <- list.files("./output/chelsa_thined3/calibration_m/set_1/", pattern = "\\.asc$",
++rasters_m <- list.files("./Contents/01_ENM/04_model_building/M/set_1/", pattern = "\\.asc$",
+                         full.names = TRUE)
+ 
+ mvars <- raster::stack(rasters_m)  # kuenm_mop no acepta objetos SpatRaster de terra
+ 
+-rasters_g <- list.files("./output/chelsa_thined3/projection_g/set_1/Current", pattern = "\\.asc$",
++rasters_g <- list.files("./Contents/01_ENM/04_model_building/G/set_1/Current", pattern = "\\.asc$",
+                         full.names = TRUE)
+ 
+ 
+@@ -59,5 +59,5 @@ resultado_mop <- kuenm_mop(M.variables = mvars, G.stack = gvars, percent = 10,
+ 
+ raster::plot(resultado_mop)
+ 
+-writeRaster(resultado_mop, "./output/chelsa_thined3/analisis_MOP.asc", format = "ascii", 
++writeRaster(resultado_mop, "./Contents/01_ENM/04_model_building/MOP_analysis.asc", format = "ascii", 
+             overwrite = TRUE)
+diff --git a/Contents/01_ENM/05_final_analyses/01_thresholds.R b/Contents/01_ENM/05_final_analyses/01_thresholds.R
+new file mode 100644
+index 0000000..577e9f7
+--- /dev/null
++++ b/Contents/01_ENM/05_final_analyses/01_thresholds.R
+@@ -0,0 +1,217 @@
++
++# Final statistics
++
++
++library(kuenm)
++
++
++rm(list=ls(all=TRUE))
++
++sp_name <- "C_chilensis"
++fmod_dir <- "./Contents/01_ENM/04_model_building/final_models_with_proj"
++format <- "asc"
++project <- TRUE
++stats <- c("mean", "sd")
++rep <- TRUE
++scenarios <- list.dirs("/Contents/01_ENM/04_model_building/G/set_1", 
++                       full.names = FALSE, recursive = FALSE)
++ext_type <- "E"
++out_dir <- "./Contents/01_ENM/04_model_building/final_model_stats"
++
++kuenm_modstats(sp.name = sp_name, fmod.dir = fmod_dir, format = format, project = project, 
++               statistics = stats, replicated = rep, proj.scenarios = scenarios, 
++               ext.type = ext_type, out.dir = out_dir)
++
++
++# Modelo final continuo
++
++library(terra)
++
++
++chilensis_m <- terra::rast("./Contents/01_ENM/04_model_building/final_model_stats/Statistics_E/calibration_mean.tif")
++chilensis_g <- terra::rast("./Contents/01_ENM/04_model_building/final_model_stats/Statistics_E/Current_mean.tif")
++class(chilensis_g)
++
++continuo <- terra::mosaic(chilensis_m, chilensis_g, fun="mean")
++plot(continuo)
++
++writeRaster(continuo, "./Contents/01_ENM/04_model_building/final_models_rasters/continuo.tif")
++
++
++# Modelo final binario
++
++library(stars)
++library(stringr)
++library(tidyverse)
++
++
++selected <- read_csv("./Contents/01_ENM/04_model_building/best_models/selected_models.csv")
++selected_grid <- expand_grid(mod = selected$Model, mn = 0:9)
++
++
++paths <- str_c("./Contents/01_ENM/04_model_building/final_models_with_proj/", selected$Model, 
++               "_E/maxentResults.csv")
++
++
++# Maximum training sensitivity plus specificity Cloglog threshold ####
++
++get.thresholds <- function(x){
++  th <- read_csv(x) %>%
++    pull("Maximum training sensitivity plus specificity Cloglog threshold")
++  th <- th[1:10]
++  return(th)
++}
++
++th <- map(paths, get.thresholds) %>%
++  unlist() %>%
++  mean()
++
++mean1.th <- read_stars("./Contents/01_ENM/04_model_building/final_models_with_proj/M_0.1_F_lqp_set_1_E/C_chilensis_avg.asc") %>%
++  set_names("z") %>%
++  mutate(z = case_when( z >= th ~ 1,
++                        z < th ~ 0)) %>%
++  write_stars("./Contents/01_ENM/04_model_building/final_models_rasters/cal_area_mean_thresh_MSS.tif")
++
++mean2.th <- read_stars("./Contents/01_ENM/04_model_building/final_models_with_proj/M_0.1_F_lqp_set_1_E/C_chilensis_Current_avg.asc") %>%
++  set_names("z") %>%
++  mutate(z = case_when( z >= th ~ 1,
++                        z < th ~ 0)) %>%
++  write_stars("./Contents/01_ENM/04_model_building/final_models_rasters/proj_area_mean_thresh_MSS.tif")
++
++# 10 percentile training presence Cloglog threshold ####
++
++get.thresholds <- function(x){
++  th <- read_csv(x) %>%
++    pull("10 percentile training presence Cloglog threshold")
++  th <- th[1:10]
++  return(th)
++}
++
++th <- map(paths, get.thresholds) %>%
++  unlist() %>%
++  mean()
++
++mean1.th <- read_stars("./Contents/01_ENM/04_model_building/final_models_with_proj/M_0.1_F_lqp_set_1_E/C_chilensis_avg.asc") %>%
++  set_names("z") %>%
++  mutate(z = case_when( z >= th ~ 1,
++                        z < th ~ 0)) %>%
++  write_stars("./Contents/01_ENM/04_model_building/final_models_rasters/cal_area_mean_thresh_10perc.tif")
++
++mean2.th <- read_stars("./Contents/01_ENM/04_model_building/final_models_with_proj/M_0.1_F_lqp_set_1_E/C_chilensis_Current_avg.asc") %>%
++  set_names("z") %>%
++  mutate(z = case_when( z >= th ~ 1,
++                        z < th ~ 0)) %>%
++  write_stars("./Contents/01_ENM/04_model_building/final_models_rasters/proj_area_mean_thresh_10perc.tif")
++
++
++# Mosaico ####
++
++rm(list=ls(all=TRUE))
++
++chilensis_m <- terra::rast("./Contents/01_ENM/04_model_building/final_models_rasters/cal_area_mean_thresh_10perc.tif")
++chilensis_g <- terra::rast("./Contents/01_ENM/04_model_building/final_models_rasters/proj_area_mean_thresh_10perc.tif")
++
++mosaico <- terra::mosaic(chilensis_m, chilensis_g, fun="mean")
++plot(mosaico)
++
++writeRaster(mosaico, "./Contents/01_ENM/04_model_building/final_models_rasters/binario_thresh_10perc.tif", overwrite=TRUE)
++
++
++# Threshold (Marlon Cobos) ####
++
++# Th 5% ####
++
++# occ es una matrix con longitud latitud
++# cont es el raster del modelo final medio en el área de calibración
++# threshold es el valor de 1 a 100 que indica que porcentaje de error es 
++# aceptable para tu modelo
++
++
++library(raster)
++
++
++rm(list=ls(all=TRUE))
++
++cont <- raster("./Contents/01_ENM/04_model_building/final_model_stats/Statistics_E/calibration_mean.tif")
++occ <- read.csv("./Contents/01_ENM/02_occurrence_data/occ_joint.csv")
++occ <- occ[, -1]
++
++o_suit <- raster::extract(cont, occ)
++o_suit_sort <- sort(o_suit)
++head(o_suit_sort)
++length(o_suit_sort)
++
++length(occ[, 1])
++length(occ[, 1])*5
++length(occ[, 1])*5/100
++(length(occ[, 1])*5/100)+1
++ceiling(length(occ[, 1])*5/100)+1
++
++th5 <- o_suit_sort[ceiling(length(occ[, 1]) * 5 / 100) + 1]
++
++mean.th5.cal <- read_stars("./Contents/01_ENM/04_model_building/final_model_stats/Statistics_E/calibration_mean.tif") %>%
++  set_names("z") %>%
++  mutate(z = case_when( z >= th5 ~ 1,
++                        z < th5 ~ 0)) %>%
++  write_stars("./Contents/01_ENM/04_model_building/final_models_rasters/cal_area_mean_thresh_5%.tif")
++
++mean.th5.proj <- read_stars("./Contents/01_ENM/04_model_building/final_model_stats/Statistics_E/Current_mean.tif") %>%
++  set_names("z") %>%
++  mutate(z = case_when( z >= th5 ~ 1,
++                        z < th5 ~ 0)) %>%
++  write_stars("./Contents/01_ENM/04_model_building/final_models_rasters/proj_area_mean_thresh_5%.tif")
++
++# Mosaico 
++
++rm(list=ls(all=TRUE))
++
++
++cal <- raster("./Contents/01_ENM/04_model_building/final_models_rasters/cal_area_mean_thresh_5%.tif") 
++proj <- raster("./Contents/01_ENM/04_model_building/final_models_rasters/proj_area_mean_thresh_5%.tif")
++
++m <- mosaic(cal, proj, fun = "mean")
++plot(m)
++
++writeRaster(m, filename = "./Contents/01_ENM/04_model_building/final_models_rasters/binario_thresh_5%", 
++            format = "ascii", overwrite = TRUE)
++
++
++# Th 10% ####
++
++rm(list=ls(all=TRUE))
++
++
++cont <- raster("./Contents/01_ENM/04_model_building/final_model_stats/Statistics_E/calibration_mean.tif")
++occ <- read.csv("./Contents/01_ENM/02_occurrence_data/occ_joint.csv")
++occ <- occ[, -1]
++
++o_suit <- raster::extract(cont, occ)
++o_suit_sort <- sort(o_suit)
++head(o_suit_sort)
++length(o_suit_sort)
++
++th10 <- o_suit_sort[ceiling(length(occ[, 1])*10/100)+1]
++
++mean.th10.cal <- read_stars("./Contents/01_ENM/04_model_building/final_model_stats/Statistics_E/calibration_mean.tif") %>%
++  set_names("z") %>%
++  mutate(z = case_when( z >= th10 ~ 1,
++                        z < th10 ~ 0)) %>%
++  write_stars("./Contents/01_ENM/04_model_building/final_models_rasters/cal_area_mean_thresh_10%.tif")
++
++mean.th10.proj <- read_stars("./Contents/01_ENM/04_model_building/final_model_stats/Statistics_E/Current_mean.tif") %>%
++  set_names("z") %>%
++  mutate(z = case_when( z >= th10 ~ 1,
++                        z < th10 ~ 0)) %>%
++  write_stars("./Contents/01_ENM/04_model_building/final_models_rasters/proj_area_mean_thresh_10%.tif")
++
++# Mosaico
++
++rm(list=ls(all=TRUE))
++
++cal <- raster("./Contents/01_ENM/04_model_building/final_models_rasters/cal_area_mean_thresh_10%.tif") 
++proj <- raster("./Contents/01_ENM/04_model_building/final_models_rasters/proj_area_mean_thresh_10%.tif")
++
++m <- mosaic(cal, proj, fun = "mean")
++plot(m)
++
++writeRaster(m, filename = "./Contents/01_ENM/04_model_building/final_models_rasters/binario_thresh_10%.tif", format = "ascii", overwrite = TRUE)
+diff --git a/Contents/01_ENM/05_final_analyses/clasificacion_jenks.R b/Contents/01_ENM/05_final_analyses/02_jenks_classification.R
+similarity index 96%
+rename from Contents/01_ENM/05_final_analyses/clasificacion_jenks.R
+rename to Contents/01_ENM/05_final_analyses/02_jenks_classification.R
+index 93d2520..daa08be 100644
+--- a/Contents/01_ENM/05_final_analyses/clasificacion_jenks.R
++++ b/Contents/01_ENM/05_final_analyses/02_jenks_classification.R
+@@ -11,7 +11,7 @@ library(classInt)
+ rm(list=ls())
+ 
+ # 1. Configuracion
+-archivo <- "./output/chelsa_5vars/Final_model_stats/Statistics_E/calibration_mean.tif"
++archivo <- "./Contents/01_ENM/04_model_building/Final_model_stats/Statistics_E/calibration_mean.tif"
+ 
+ # 2. Cargar raster continuo
+ r <- rast(archivo)
+@@ -230,7 +230,7 @@ print(round(comparacion, 5))
+ 
+ writeRaster(
+   r_clases,
+-  "./output/chelsa_5vars/final_models_rasters/jenks_3classes.tif",
++  "./Contents/01_ENM/04_model_building/final_models_rasters/jenks_3classes.tif",
+   overwrite = TRUE,
+   datatype = "INT1U",
+   gdal = c("COMPRESS=LZW"))
+diff --git a/Contents/01_ENM/05_final_analyses/maps.R b/Contents/01_ENM/05_final_analyses/03_final_maps.R
+similarity index 91%
+rename from Contents/01_ENM/05_final_analyses/maps.R
+rename to Contents/01_ENM/05_final_analyses/03_final_maps.R
+index c9e52cd..cf6fe8d 100644
+--- a/Contents/01_ENM/05_final_analyses/maps.R
++++ b/Contents/01_ENM/05_final_analyses/03_final_maps.R
+@@ -12,8 +12,8 @@ rm(list = ls())
+ # 1. Load rasters
+ # ---------------------------------------------------------
+ 
+-r_cont <- rast("./output/chelsa_5vars/final_models_rasters/continuo.tif")
+-r_bin  <- rast("./output/chelsa_5vars/final_models_rasters/binario_thresh_10%.tif")
++r_cont <- rast("./Contents/01_ENM/04_model_building/final_models_rasters/continuo.tif")
++r_bin  <- rast("./Contents/01_ENM/04_model_building/final_models_rasters/binario_thresh_10perc.tif")
+ 
+ r_bin <- as.factor(r_bin)
+ 
+@@ -27,9 +27,9 @@ levels(r_bin) <- data.frame(
+ # 2. Load administrative boundaries
+ # ---------------------------------------------------------
+ 
+-arg_adm1 <- st_read("./paises_adm/ARG_adm/ARG_adm1.shp", quiet = TRUE)
+-bol_adm1 <- st_read("./paises_adm/BOL_adm/BOL_adm1.shp", quiet = TRUE)
+-pry_adm1 <- st_read("./paises_adm/PRY_adm/PRY_adm1.shp", quiet = TRUE)
++arg_adm1 <- st_read("./Contents/01_ENM/04_model_building/paises_adm/ARG_adm/ARG_adm1.shp", quiet = TRUE)
++bol_adm1 <- st_read("./Contents/01_ENM/04_model_building/paises_adm/BOL_adm/BOL_adm1.shp", quiet = TRUE)
++pry_adm1 <- st_read("./Contents/01_ENM/04_model_building/paises_adm/PRY_adm/PRY_adm1.shp", quiet = TRUE)
+ 
+ provincial_limits <- rbind(
+   st_sf(geometry = st_geometry(arg_adm1)),
+@@ -373,7 +373,7 @@ p_comb
+ # ---------------------------------------------------------
+ 
+ ggsave(
+-  "./output/map_continuous.png",
++  "./Contents/01_ENM/04_model_building/map_continuous.png",
+   p_cont,
+   width = 6,
+   height = 7.5,
+@@ -381,7 +381,7 @@ ggsave(
+ )
+ 
+ ggsave(
+-  "./output/map_binary.png",
++  "./Contents/01_ENM/04_model_building/map_binary.png",
+   p_bin,
+   width = 6,
+   height = 7.5,
+@@ -389,7 +389,7 @@ ggsave(
+ )
+ 
+ ggsave(
+-  "./output/maps_combined.png",
++  "./Contents/01_ENM/04_model_building/maps_combined.png",
+   p_comb,
+   width = 12,
+   height = 7.5,
+diff --git a/Contents/01_ENM/05_final_analyses/map_jenks.R b/Contents/01_ENM/05_final_analyses/04_jenks_final_map.R
+similarity index 95%
+rename from Contents/01_ENM/05_final_analyses/map_jenks.R
+rename to Contents/01_ENM/05_final_analyses/04_jenks_final_map.R
+index 77f4b48..576e899 100644
+--- a/Contents/01_ENM/05_final_analyses/map_jenks.R
++++ b/Contents/01_ENM/05_final_analyses/04_jenks_final_map.R
+@@ -6,8 +6,9 @@ library(geosphere)
+ 
+ rm(list = ls())
+ 
++
+ # =========================================================
+-# AJUSTES (movelos a gusto)
++# AJUSTES
+ # =========================================================
+ 
+ # Leyenda: posición en el panel (0 = izquierda/abajo, 1 = derecha/arriba)
+@@ -29,8 +30,8 @@ pad_bottom <- 0.03
+ pad_top    <- 0.025
+ 
+ # Archivo
+-file_jenks <- "D:/enm_cchilensis/output/chelsa_5vars/final_models_rasters/jenks_3classes.tif"
+-file_out   <- "D:/enm_cchilensis//output/map_jenks.png"
++file_jenks <- "./Contents/01_ENM/04_model_building/final_models_rasters/jenks_3classes.tif"
++file_out   <- "./Contents/01_ENM/04_model_building/map_jenks.png"
+ 
+ 
+ # =========================================================
+diff --git a/Contents/01_ENM/05_final_analyses/Thresholds.R b/Contents/01_ENM/05_final_analyses/Thresholds.R
+deleted file mode 100644
+index f90c95d..0000000
+--- a/Contents/01_ENM/05_final_analyses/Thresholds.R
++++ /dev/null
+@@ -1,217 +0,0 @@
+-
+-# Estadísticas finales
+-
+-
+-library(kuenm)
+-
+-
+-rm(list=ls(all=TRUE))
+-
+-sp_name <- "C_chilensis"
+-fmod_dir <- "./output/chelsa_5vars/final_models_time_proj"
+-format <- "asc"
+-project <- TRUE
+-stats <- c("mean", "sd")
+-rep <- TRUE
+-scenarios <- list.dirs("output/chelsa_5vars/projection_g/set_1", 
+-                       full.names = FALSE, recursive = FALSE)
+-ext_type <- "E"
+-out_dir <- "./output/chelsa_5vars/final_model_stats2"
+-
+-kuenm_modstats(sp.name = sp_name, fmod.dir = fmod_dir, format = format, project = project, 
+-               statistics = stats, replicated = rep, proj.scenarios = scenarios, 
+-               ext.type = ext_type, out.dir = out_dir)
+-
+-
+-# Modelo final continuo
+-
+-library(terra)
+-
+-
+-chilensis_m <- terra::rast("./output/chelsa_5vars/final_model_stats/Statistics_E/calibration_mean.tif")
+-chilensis_g <- terra::rast("./output/chelsa_5vars/final_model_stats/Statistics_E/Current_mean.tif")
+-class(chilensis_g)
+-
+-continuo <- terra::mosaic(chilensis_m, chilensis_g, fun="mean")
+-plot(continuo)
+-
+-writeRaster(continuo, "./output/chelsa_5vars/final_models_rasters/continuo.tif")
+-
+-
+-# Modelo final binario
+-
+-library(stars)
+-library(stringr)
+-library(tidyverse)
+-
+-
+-selected <- read_csv("./output/chelsa_5vars/best_models/selected_models.csv")
+-selected_grid <- expand_grid(mod = selected$Model, mn = 0:9)
+-
+-
+-paths <- str_c("./output/chelsa_5vars/final_models_with_proj/", selected$Model, 
+-               "_E/maxentResults.csv")
+-
+-
+-# Maximum training sensitivity plus specificity Cloglog threshold ####
+-
+-get.thresholds <- function(x){
+-  th <- read_csv(x) %>%
+-    pull("Maximum training sensitivity plus specificity Cloglog threshold")
+-  th <- th[1:10]
+-  return(th)
+-}
+-
+-th <- map(paths, get.thresholds) %>%
+-  unlist() %>%
+-  mean()
+-
+-mean1.th <- read_stars("./output/chelsa_5vars/final_models_with_proj/M_0.1_F_lqp_set_1_E/C_chilensis_avg.asc") %>%
+-  set_names("z") %>%
+-  mutate(z = case_when( z >= th ~ 1,
+-                        z < th ~ 0)) %>%
+-  write_stars("./output/chelsa_5vars/final_models_rasters/cal_area_mean_thresh_MSS.tif")
+-
+-mean2.th <- read_stars("./output/chelsa_5vars/final_models_with_proj/M_0.1_F_lqp_set_1_E/C_chilensis_Current_avg.asc") %>%
+-  set_names("z") %>%
+-  mutate(z = case_when( z >= th ~ 1,
+-                        z < th ~ 0)) %>%
+-  write_stars("./output/chelsa_5vars/final_models_rasters/proj_area_mean_thresh_MSS.tif")
+-
+-# 10 percentile training presence Cloglog threshold ####
+-
+-get.thresholds <- function(x){
+-  th <- read_csv(x) %>%
+-    pull("10 percentile training presence Cloglog threshold")
+-  th <- th[1:10]
+-  return(th)
+-}
+-
+-th <- map(paths, get.thresholds) %>%
+-  unlist() %>%
+-  mean()
+-
+-mean1.th <- read_stars("./output/chelsa_5vars/final_models_with_proj/M_0.1_F_lqp_set_1_E/C_chilensis_avg.asc") %>%
+-  set_names("z") %>%
+-  mutate(z = case_when( z >= th ~ 1,
+-                        z < th ~ 0)) %>%
+-  write_stars("./output/chelsa_5vars/final_models_rasters/cal_area_mean_thresh_10%.tif")
+-
+-mean2.th <- read_stars("./output/chelsa_5vars/final_models_with_proj/M_0.1_F_lqp_set_1_E/C_chilensis_Current_avg.asc") %>%
+-  set_names("z") %>%
+-  mutate(z = case_when( z >= th ~ 1,
+-                        z < th ~ 0)) %>%
+-  write_stars("./output/chelsa_5vars/final_models_rasters/proj_area_mean_thresh_10%.tif")
+-
+-
+-# Mosaico ####
+-
+-rm(list=ls(all=TRUE))
+-
+-chilensis_m <- terra::rast("./output/chelsa_5vars/final_models_rasters/cal_area_mean_thresh_10%.tif")
+-chilensis_g <- terra::rast("./output/chelsa_5vars/final_models_rasters/proj_area_mean_thresh_10%.tif")
+-
+-mosaico <- terra::mosaic(chilensis_m, chilensis_g, fun="mean")
+-plot(mosaico)
+-
+-writeRaster(mosaico, "./output/chelsa_5vars/final_models_rasters/binario_thresh_10%.tif", overwrite=TRUE)
+-
+-
+-# Threshold (Marlon Cobos) ####
+-
+-# Th 5% ####
+-
+-# occ es una matrix con longitud latitud
+-# cont es el raster del modelo final medio en el área de calibración
+-# threshold es el valor de 1 a 100 que indica que porcentaje de error es 
+-# aceptable para tu modelo
+-
+-
+-library(raster)
+-
+-
+-rm(list=ls(all=TRUE))
+-
+-cont <- raster("./output/chelsa_5vars/final_model_stats/Statistics_E/calibration_mean.tif")
+-occ <- read.csv("./datos/occ_joint_thined.csv")
+-occ <- occ[, -1]
+-
+-o_suit <- raster::extract(cont, occ)
+-o_suit_sort <- sort(o_suit)
+-head(o_suit_sort)
+-length(o_suit_sort)
+-
+-length(occ[, 1])
+-length(occ[, 1])*5
+-length(occ[, 1])*5/100
+-(length(occ[, 1])*5/100)+1
+-ceiling(length(occ[, 1])*5/100)+1
+-
+-th5 <- o_suit_sort[ceiling(length(occ[, 1]) * 5 / 100) + 1]
+-
+-mean.th5.cal <- read_stars("./output/chelsa_5vars/final_model_stats/Statistics_E/calibration_mean.tif") %>%
+-  set_names("z") %>%
+-  mutate(z = case_when( z >= th5 ~ 1,
+-                        z < th5 ~ 0)) %>%
+-  write_stars("./output/chelsa_5vars/final_models_rasters/cal_area_mean_thresh_5.tif")
+-
+-mean.th5.proj <- read_stars("./output/chelsa_5vars/final_model_stats/Statistics_E/Current_mean.tif") %>%
+-  set_names("z") %>%
+-  mutate(z = case_when( z >= th5 ~ 1,
+-                        z < th5 ~ 0)) %>%
+-  write_stars("./output/chelsa_5vars/final_models_rasters/proj_area_mean_thresh_5.tif")
+-
+-# Mosaico 
+-
+-rm(list=ls(all=TRUE))
+-
+-
+-cal <- raster("./output/chelsa_5vars/final_models_rasters/cal_area_mean_thresh_5.tif") 
+-proj <- raster("./output/chelsa_5vars/final_models_rasters/proj_area_mean_thresh_5.tif")
+-
+-m <- mosaic(cal, proj, fun = "mean")
+-plot(m)
+-
+-writeRaster(m, filename = "./output/chelsa_5vars/final_models_rasters/binario_thresh_5", 
+-            format = "ascii", overwrite = TRUE)
+-
+-
+-# Th 10% ####
+-
+-rm(list=ls(all=TRUE))
+-
+-
+-cont <- raster("./output/chelsa_5vars/final_model_stats/Statistics_E/calibration_mean.tif")
+-occ <- read.csv("./datos/occ_joint_thined.csv")
+-occ <- occ[, -1]
+-
+-o_suit <- raster::extract(cont, occ)
+-o_suit_sort <- sort(o_suit)
+-head(o_suit_sort)
+-length(o_suit_sort)
+-
+-th10 <- o_suit_sort[ceiling(length(occ[, 1])*10/100)+1]
+-
+-mean.th10.cal <- read_stars("./output/chelsa_5vars/final_model_stats/Statistics_E/calibration_mean.tif") %>%
+-  set_names("z") %>%
+-  mutate(z = case_when( z >= th10 ~ 1,
+-                        z < th10 ~ 0)) %>%
+-  write_stars("./output/chelsa_5vars/final_models_rasters/cal_area_mean_thresh_10.tif")
+-
+-mean.th10.proj <- read_stars("./output/chelsa_5vars/final_model_stats/Statistics_E/Current_mean.tif") %>%
+-  set_names("z") %>%
+-  mutate(z = case_when( z >= th10 ~ 1,
+-                        z < th10 ~ 0)) %>%
+-  write_stars("./output/chelsa_5vars/final_models_rasters/proj_area_mean_thresh_10.tif")
+-
+-# Mosaico
+-
+-rm(list=ls(all=TRUE))
+-
+-cal <- raster("./output/chelsa_5vars/final_models_rasters/cal_area_mean_thresh_10.tif") 
+-proj <- raster("./output/chelsa_5vars/final_models_rasters/proj_area_mean_thresh_10.tif")
+-
+-m <- mosaic(cal, proj, fun = "mean")
+-plot(m)
+-
+-writeRaster(m, filename = "./output/chelsa_5vars/final_models_rasters/binario_thresh_10.tif", format = "ascii", overwrite = TRUE)
+diff --git a/Contents/01_ENM/05_final_analyses/resolution_check.R b/Contents/01_ENM/05_final_analyses/resolution_check.R
+deleted file mode 100644
+index dc61f23..0000000
+--- a/Contents/01_ENM/05_final_analyses/resolution_check.R
++++ /dev/null
+@@ -1,21 +0,0 @@
+-#------------------------------------------------------------------------
+-# Check spatial resolution and raster extent for layers
+-#------------------------------------------------------------------------
+-
+-path = ("D:/LFLS/Analyses/MNE_garrapatas/Modelado_turicata/Rasters/Calibration_ascii") 
+-
+-files <- list.files(path = path, pattern = ".asc$", full.names = TRUE)
+-files  # 22
+-
+-mytable <- NULL
+-
+-for(i in 1:length(files)){
+-  r <- raster(files[i])
+-  mytable <- rbind(mytable, c(files[i], round(c(res(r), as.vector(extent(r))), 16)))
+-}
+-
+-colnames(mytable) <- c("File","Resol.x","Resol.y","xmin","xmax","ymin","ymax")
+-mytable
+-mytable <- as.data.frame(mytable)
+-
+-write_xlsx(mytable, "D:/Trabajo/Analisis/MNE_garrapata/Rasters/Calibration_ascii_props/Rasters_props.xlsx")
+diff --git a/Contents/01_ENM/ENM_README.md b/Contents/01_ENM/ENM_README.md
+index 5df35e2..38dc5f4 100644
+--- a/Contents/01_ENM/ENM_README.md
++++ b/Contents/01_ENM/ENM_README.md
+@@ -7,7 +7,7 @@ This directory contains the scripts and supporting documentation used to develop
+ #### 1. Environmental data preparation and variable screening  
+ Environmental predictors were obtained from the CHELSA (Climatologies at High Resolution for the Earth's Land Surface Areas) dataset, version 2.1. These included bioclimatic variables representing temperature and precipitation conditions for the 1981–2010 reference period, as well as solar radiation variables (RSDS). Environmental layers were cropped and masked to the calibration area (M), retaining their original spatial resolution.
+ 
+-To reduce redundancy among predictors, pairwise Pearson correlation coefficients were calculated using a random sample of raster cells with complete environmental data within M. Strongly correlated variable pairs (|r| ≥ 0.8) were identified, and variable retention decisions also considered ecological relevance to *Chelonoidis chilensis*.
++To reduce redundancy among predictors, pairwise Spearman correlation coefficients were calculated using a random sample of raster cells with complete environmental data within M. Strongly correlated variable pairs (|r| ≥ 0.8) were identified, and variable retention decisions also considered ecological relevance to *Chelonoidis chilensis*.
+ 
+ #### 2. Candidate model calibration  
+ Candidate models were generated with `kuenm_cal`, exploring combinations of regularization multipliers (RM), feature classes (FC), and sets of environmental predictors.
