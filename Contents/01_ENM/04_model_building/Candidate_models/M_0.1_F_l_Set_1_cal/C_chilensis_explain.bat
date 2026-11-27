@@ -1,2 +1,0 @@
-java -mx1000m -cp "/C:/Program Files/maxent/maxent/maxent.jar;C:\Program Files\maxent\maxent\maxent.jar" density.Explain -l D:\CIC\Analisis\C_chilensis_spatial\Chaco_tortoise_spatial\Contents\01_ENM\04_model_building\Candidate_models\M_0.1_F_l_Set_1_cal\C_chilensis.lambdas D:\CIC\Analisis\C_chilensis_spatial\Chaco_tortoise_spatial\Contents\01_ENM\04_model_building\Candidate_models\M_0.1_F_l_Set_1_cal\C_chilensis.asc D:\CIC\Analisis\C_chilensis_spatial\Chaco_tortoise_spatial\Contents\01_ENM\04_model_building\M\Set_1
-@if errorlevel 1 pause
