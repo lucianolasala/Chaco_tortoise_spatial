@@ -6,9 +6,8 @@ library(magrittr)
 library(spThin)
 library(dplyr)
 
-setwd("D:/LFLS/Analyses/C_chilensis_EMN")
 
-occ <- read_delim("./Modelado/Occs/C_chilensis.csv", delim = ",") %>% 
+occ <- read_delim("./Contents/01_ENM/02_occurrence_data/Occs_chilensis.csv", delim = ",") %>% 
 thin(loc.data = .,
        long.col = "Lon",
        lat.col = "Lat",
@@ -18,7 +17,7 @@ thin(loc.data = .,
        write.files = TRUE,
        max.files = 10,
        write.log.file = TRUE,
-       out.dir = "./Modelado/Occs_thin/",
+       out.dir = "./Contents/01_ENM/02_occurrence_data/Occs_thin/",
        out.base = "C_chilensis_thin",
        log.file = "C_chilensis_thin_log.txt")
 
@@ -29,4 +28,4 @@ head(occ)
 length(occ$sp)  # 2511
 str(occ)
 
-write.csv(occ, "./Occurrences/S_scrofa_thinned.csv", row.names = F) 
+write.csv(occ, "./Contents/01_ENM/02_occurrence_data/occs_thinned.csv", row.names = F) 

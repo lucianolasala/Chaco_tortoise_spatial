@@ -12,8 +12,8 @@ rm(list = ls())
 # 1. Load rasters
 # ---------------------------------------------------------
 
-r_cont <- rast("./output/chelsa_5vars/final_models_rasters/continuo.tif")
-r_bin  <- rast("./output/chelsa_5vars/final_models_rasters/binario_thresh_10%.tif")
+r_cont <- rast("./Contents/01_ENM/04_model_building/final_models_rasters/continuo.tif")
+r_bin  <- rast("./Contents/01_ENM/04_model_building/final_models_rasters/binario_thresh_10perc.tif")
 
 r_bin <- as.factor(r_bin)
 
@@ -27,9 +27,9 @@ levels(r_bin) <- data.frame(
 # 2. Load administrative boundaries
 # ---------------------------------------------------------
 
-arg_adm1 <- st_read("./paises_adm/ARG_adm/ARG_adm1.shp", quiet = TRUE)
-bol_adm1 <- st_read("./paises_adm/BOL_adm/BOL_adm1.shp", quiet = TRUE)
-pry_adm1 <- st_read("./paises_adm/PRY_adm/PRY_adm1.shp", quiet = TRUE)
+arg_adm1 <- st_read("./Contents/01_ENM/04_model_building/paises_adm/ARG_adm/ARG_adm1.shp", quiet = TRUE)
+bol_adm1 <- st_read("./Contents/01_ENM/04_model_building/paises_adm/BOL_adm/BOL_adm1.shp", quiet = TRUE)
+pry_adm1 <- st_read("./Contents/01_ENM/04_model_building/paises_adm/PRY_adm/PRY_adm1.shp", quiet = TRUE)
 
 provincial_limits <- rbind(
   st_sf(geometry = st_geometry(arg_adm1)),
@@ -373,7 +373,7 @@ p_comb
 # ---------------------------------------------------------
 
 ggsave(
-  "./output/map_continuous.png",
+  "./Contents/01_ENM/04_model_building/map_continuous.png",
   p_cont,
   width = 6,
   height = 7.5,
@@ -381,7 +381,7 @@ ggsave(
 )
 
 ggsave(
-  "./output/map_binary.png",
+  "./Contents/01_ENM/04_model_building/map_binary.png",
   p_bin,
   width = 6,
   height = 7.5,
@@ -389,7 +389,7 @@ ggsave(
 )
 
 ggsave(
-  "./output/maps_combined.png",
+  "./Contents/01_ENM/04_model_building/maps_combined.png",
   p_comb,
   width = 12,
   height = 7.5,

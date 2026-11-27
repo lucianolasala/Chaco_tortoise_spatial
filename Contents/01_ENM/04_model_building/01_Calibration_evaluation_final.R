@@ -9,21 +9,24 @@
 
 rm(list=ls(all=TRUE))
 
+
 # Loading libraries
 
 library(kuenm)
 
-# Loadging occurrence data
-occ_joint <- "./Occs/occ_joint_thinned.csv"
-occ_tra <- "./Occs/occ_train_thinned.csv"     
+setwd("./Contents/01_ENM/04_model_building")
+
+# Loading occurrence data
+occ_joint <- "./Contents/01_ENM/02_occurrence_data/occ_joint.csv"
+occ_tra <- "./Contents/01_ENM/02_occurrence_data/occ_train.csv"     
 M_var_dir <- "M"     
-batch_cal <- "./Contents/01_ENM/04_model_building"   
-out_dir <- "./Contents/01_ENM/04_model_building/Candidate_models"    
+batch_cal <- "./candidate_models"   
+out_dir <- "./candidate_models"    
 reg_mult <- c(0.1,0.25,0.5,0.75,1,2.5,5)
 f_clas <- c("l", "lq", "lqp")
 args <- NULL
 
-# Usar ruta absoluta porque tira error
+# Usar ruta absoluta
 mxpath <- "C:/Program Files/maxent/maxent" 
 wait <- TRUE
 run <- TRUE
@@ -43,12 +46,12 @@ kuenm_cal(occ.joint = occ_joint, occ.tra = occ_tra, M.var.dir = M_var_dir,
 # complexity (AICc). After evaluation, this function selects the best models 
 # based on user-defined criteria.  
 
-cresdir <- "./candidate_models"
-occ_joint <- "./Occs/occ_joint_thinned.csv"
-occ_tra <- "./Occs/occ_train_thinned.csv"  
-occ_test <- "./Occs/occ_test_thinned.csv"
+cresdir <- "candidate_models"
+occ_joint <- "./Contents/01_ENM/02_occurrence_data/occ_joint.csv"
+occ_tra <- "./Contents/01_ENM/02_occurrence_data/occ_train.csv"
+occ_test <- "./Contents/01_ENM/02_occurrence_data/occ_test.csv"
 batch_cal <- "./candidate_models"
-out_eval <- "./Best_models"
+out_eval <- "./best_models"
 
 threshold <- 5  # Percentage of training data omission error allowed (E); default = 5
 rand_percent <- 50  # Percentage of data to be used for the bootstraping process 
@@ -72,11 +75,11 @@ kuenm_ceval(path = cresdir, occ.joint = occ_joint, occ.tra = occ_tra,
 
 rm(list=ls(all=TRUE))
 
-occ_joint <- "./Occs/occ_joint_thinned.csv"
+occ_joint <- "./Contents/01_ENM/02_occurrence_data/occ_joint.csv"
 batch_fin <- "./final_models_no_proj"
-moddir <- "./Final_models_no_proj"
+moddir <- "./final_models_no_proj"
 M_var_dir <- "M"
-out_eval <- "./Best_models"
+out_eval <- "./best_models"
 args <- NULL
 
 mxpath <- "C:/Program Files/maxent/maxent" 
@@ -95,14 +98,14 @@ kuenm_mod(occ.joint = occ_joint, M.var.dir = M_var_dir, out.eval = out_eval,
 
 rm(list=ls(all=TRUE))
 
-occ_joint <- "./datos/occ_joint_thined.csv" 
-batch_fin <- "./output/chelsa_5vars/final_models_with_proj"
-moddir <- "./output/chelsa_5vars/final_models_time_proj"
-M_var_dir <- "output/chelsa_5vars/calibration_m"
-G_var_dir <- "output/chelsa_5vars/projection_g"
-out_eval <- "./output/chelsa_5vars/best_models"
+occ_joint <- "./Contents/01_ENM/02_occurrence_data/occ_joint.csv"
+batch_fin <- "./final_models_with_proj"
+moddir <- "./final_models_with_proj"
+M_var_dir <- "M"
+G_var_dir <- "G"
+out_eval <- "./best_models"
 args <- NULL
-mxpath <- "C:/Users/vazqu/Documents/Uni/Doctorado/enm_cchilensis/maxent"
+mxpath <- "C:/Program Files/maxent/maxent" 
 
 kuenm_mod(occ.joint = occ_joint, M.var.dir = M_var_dir, 
           G.var.dir = G_var_dir, ext.type = "ext", out.eval = out_eval, 

@@ -6,8 +6,9 @@ library(geosphere)
 
 rm(list = ls())
 
+
 # =========================================================
-# AJUSTES (movelos a gusto)
+# AJUSTES
 # =========================================================
 
 # Leyenda: posición en el panel (0 = izquierda/abajo, 1 = derecha/arriba)
@@ -29,8 +30,8 @@ pad_bottom <- 0.03
 pad_top    <- 0.025
 
 # Archivo
-file_jenks <- "D:/enm_cchilensis/output/chelsa_5vars/final_models_rasters/jenks_3classes.tif"
-file_out   <- "D:/enm_cchilensis//output/map_jenks.png"
+file_jenks <- "./Contents/01_ENM/04_model_building/final_models_rasters/jenks_3classes.tif"
+file_out   <- "./Contents/01_ENM/04_model_building/map_jenks.png"
 
 
 # =========================================================
