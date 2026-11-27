@@ -1,11 +1,9 @@
-
+#======================================================
 # Final statistics
-
-
-library(kuenm)
-
+#======================================================
 
 rm(list=ls(all=TRUE))
+library(kuenm)
 
 sp_name <- "C_chilensis"
 fmod_dir <- "./Contents/01_ENM/04_model_building/final_models_with_proj"
