@@ -23,7 +23,8 @@
 *.dbf
 *.qmd
 *.txt
-*.aux.xml
+*.aux
+*.xml
 *.csv
 *.html
 *.lambdas
